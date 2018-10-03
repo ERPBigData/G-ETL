@@ -1,0 +1,34 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button mat-raised-button style="height:100%;margin-top:0px"> <img style="width:85px; height:auto; background: #fff" src="assets/image/logo.png"/></button>
+    <span class="example-spacer"></span>
+    <mat-icon class="example-icon">settings</mat-icon>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-grid-list cols="4" rowHeight="80px">
+    <mat-grid-tile [colspan]="1" [rowspan]="1"></mat-grid-tile>
+    <mat-grid-tile [colspan]="3" [rowspan]="1" style="background-color: #d9d9d9">
+        <button mat-button style="background-color:#3f51b5;color:#fff;border-radius:12px">Run</button>
+    </mat-grid-tile>
+</mat-grid-list>
+<mat-grid-list cols="4" rowHeight="130px" >
+  <mat-grid-tile [colspan]="1" [rowspan]="4">
+    <div class="dragbox vertical" appSortableList (sort)="sort($event)"> 
+      <mat-card *ngFor="let box of availableBoxes" class="box" appDroppable (dragStart)="currentBox = box"> {{ box }}
+         <div class="box box-helper" *appDraggableHelper> {{ box }}</div>
+      </mat-card>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="3" [rowspan]="4">       
+    <div class="dropzone dotted" appDropzone (drop)="move(currentBox, dropzone)" (remove)="move(currentBox, availableBoxes)">
+      <div *ngFor="let box of dropzone" class="box-dropzone"  appDroppable (dragStart)="currentBox = box" >
+        <span> {{ box }}</span>
+         <div class="box box-helper" *appDraggableHelper> {{ box }}</div>
+      </div>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
+
+
+
+ 
